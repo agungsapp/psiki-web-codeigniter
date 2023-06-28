@@ -31,13 +31,13 @@ class Filters extends BaseConfig
      * applied before and after every request.
      */
     public array $globals = [
+        // 'before' => [
+        //     'honeypot',
+        //     'login',
         'before' => [
             'honeypot',
-            'login',
-            // 'before' => [
-            // 'honeypot',
-            // 'csrf',
-            // 'invalidchars',
+            'csrf',
+            'invalidchars',
         ],
         'after' => [
             'toolbar',
@@ -66,5 +66,7 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+        'login' => ['before' => ['pages/psikotes']],
+    ];
 }
