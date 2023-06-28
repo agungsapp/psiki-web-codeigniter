@@ -31,6 +31,12 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Pages::index');
 
+$routes->group('admin', function ($routes) {
+    // Filter atau pengaturan khusus untuk grup route admin
+    $routes->get('dashboard', 'Admin\Dashboard::index');
+    $routes->get('user', 'Admin\UsersController::index');
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
@@ -49,4 +55,5 @@ if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 }
 
 
-// buat halaman register belom selesai 
+// buat halaman register belom selesai //done
+// sudah selesai templating admin, dan juga menampilkan index halaman data user khusus reguler user

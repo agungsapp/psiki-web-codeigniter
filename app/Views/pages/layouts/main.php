@@ -55,6 +55,8 @@
             </svg>
           </button>
         </div>
+      <?php else : ?>
+        <div class="flex items-center md:order-2"></div>
       <?php endif ?>
       <!-- profile dropdown end -->
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
