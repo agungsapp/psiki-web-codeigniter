@@ -8,4 +8,21 @@ class Home extends BaseController
     {
         return view('welcome_message');
     }
+
+    public function userValidate()
+    {
+
+
+        // pengecekan login
+        if (logged_in()) {
+
+            // pemisahan role
+            if (in_groups('admin')) {
+                return redirect()->to('/admin/dashboard');
+            }
+        } else {
+            // jika guest
+            return redirect()->to('/pages/index');
+        }
+    }
 }
