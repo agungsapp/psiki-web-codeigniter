@@ -6,20 +6,7 @@
           <!-- Logo -->
           <!-- ============================================================== -->
           <a class="navbar-brand" href="index.html">
-            <!-- Logo icon -->
-            <b class="logo-icon ps-2">
-              <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-              <!-- Dark Logo icon -->
-              <img src="<?= base_url('/admin/assets'); ?>/images/logo-icon.png" alt="homepage" class="light-logo" />
-
-            </b>
-            <!--End Logo icon -->
-            <!-- Logo text -->
-            <span class="logo-text">
-              <!-- dark Logo text -->
-              <img src="<?= base_url('/admin/assets'); ?>/images/logo-text.png" alt="homepage" class="light-logo" />
-
-            </span>
+            <span class="fw-boldb">PsikiWeb | Admin</span>
             <!-- Logo icon -->
             <!-- <b class="logo-icon"> -->
             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->

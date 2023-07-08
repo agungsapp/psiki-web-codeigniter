@@ -29,12 +29,15 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Pages::index');
+$routes->get('/', 'Home::userValidate');
 
 $routes->group('admin', function ($routes) {
     // Filter atau pengaturan khusus untuk grup route admin
     $routes->get('dashboard', 'Admin\Dashboard::index');
+    $routes->get('admin', 'Admin\UsersController::admin');
     $routes->get('user', 'Admin\UsersController::index');
+    $routes->get('banksoal', 'Admin\SoalController::index');
+
 });
 
 /*
@@ -57,3 +60,8 @@ if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 
 // buat halaman register belom selesai //done
 // sudah selesai templating admin, dan juga menampilkan index halaman data user khusus reguler user
+
+
+
+// benerin dulu view admin ,check migration, sekalian bikinin seeder, biar bisa di run divca. 
+// oiya jangan lupa bikin lemparan di home untuk perbedaan rolenya .

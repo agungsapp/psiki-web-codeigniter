@@ -29,4 +29,17 @@ class UsersController extends BaseController
 
         return view('admin/users/user/index', $data);
     }
+
+    public function admin()
+    {
+        $data = [
+            'title' => 'Data Admin',
+            'breadcrumbs' => [
+                'Data Admin' => '/admin/admin',
+            ],
+            'users' => $this->userFunModel->getUsersByGroupId(1),
+        ];
+
+        return view('admin/users/admin/index', $data);
+    }
 }
