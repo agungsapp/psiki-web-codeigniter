@@ -41,3 +41,38 @@
   </div>
 </div>
 <?= $this->endSection(); ?>
+
+<!-- numpang wp -->
+
+[fusion_table fusion_table_type="2" fusion_table_rows="2" fusion_table_columns="9" animation_type="" animation_direction="left" animation_speed="0.3" animation_offset="" hide_on_mobile="small-visibility,medium-visibility,large-visibility" class="" id=""]
+<div class="table-1">
+  <table width="100%">
+    <thead>
+      <tr>
+        <th align="left">Column 1</th>
+        <th align="left">Column 2</th>
+        <th align="left">Column 3</th>
+        <th align="left">Column 1</th>
+        <th align="left">Column 2</th>
+        <th align="left">Column 3</th>
+        <th align="left">Column 1</th>
+        <th align="left">Column 2</th>
+        <th align="left">Column 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td align="left">Column 1 Value</td>
+        <td align="left">Column 2 Value</td>
+        <td align="left">Column 3 Value</td>
+        <td align="left">Column 1 Value</td>
+        <td align="left">Column 2 Value</td>
+        <td align="left">Column 3 Value</td>
+        <td align="left">Column 1 Value</td>
+        <td align="left">Column 2 Value</td>
+        <td align="left">Column 3 Value</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+[/fusion_table]
