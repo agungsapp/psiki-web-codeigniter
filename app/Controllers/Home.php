@@ -17,8 +17,10 @@ class Home extends BaseController
         if (logged_in()) {
 
             // pemisahan role
-            if (in_groups('admin')) {
+            if (in_groups('admin') == 1) {
                 return redirect()->to('/admin/dashboard');
+            } else if (in_groups('user')) {
+                return redirect()->to('pages/index');
             }
         } else {
             // jika guest

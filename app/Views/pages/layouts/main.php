@@ -109,7 +109,195 @@
     </div>
   </footer>
 
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+
   <script src="<?= base_url('user/assets'); ?>/js/flowbite.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+  <script>
+    // Data pelatihan
+    const trainingData = [
+      // Gejala 1: ya, Gejala 2: ya, Gejala 3: ya
+      {
+        jawaban: ['ya', 'ya', 'ya'],
+        diagnosis: 'sakit1'
+      },
+      {
+        jawaban: ['ya', 'ya', 'tidak'],
+        diagnosis: 'sakit2'
+      },
+      // Gejala 1: ya, Gejala 2: tidak, Gejala 3: ya
+      {
+        jawaban: ['ya', 'tidak', 'ya'],
+        diagnosis: 'sakit3'
+      },
+      {
+        jawaban: ['ya', 'tidak', 'tidak'],
+        diagnosis: 'sakit4'
+      },
+      // Gejala 1: tidak, Gejala 2: ya, Gejala 3: ya
+      {
+        jawaban: ['tidak', 'ya', 'ya'],
+        diagnosis: 'sakit5'
+      },
+      {
+        jawaban: ['tidak', 'ya', 'tidak'],
+        diagnosis: 'sakit6'
+      },
+      // Gejala 1: tidak, Gejala 2: tidak, Gejala 3: ya
+      {
+        jawaban: ['tidak', 'tidak', 'ya'],
+        diagnosis: 'sakit7'
+      },
+      {
+        jawaban: ['tidak', 'tidak', 'tidak'],
+        diagnosis: 'sakit8'
+      },
+    ];
+
+    // Fungsi untuk menghitung probabilitas kemunculan setiap diagnosis pada data pelatihan
+    function calculateDiagnosisProbabilities(trainingData) {
+      const totalData = trainingData.length;
+      const diagnosisProbabilities = {};
+
+      for (const data of trainingData) {
+        const diagnosis = data.diagnosis;
+        if (!diagnosisProbabilities[diagnosis]) diagnosisProbabilities[diagnosis] = 0;
+        diagnosisProbabilities[diagnosis]++;
+      }
+
+      for (const diagnosis in diagnosisProbabilities) {
+        diagnosisProbabilities[diagnosis] /= totalData;
+      }
+
+      return diagnosisProbabilities;
+    }
+
+    // Fungsi untuk menghitung probabilitas awal atau probabilitas prior untuk setiap diagnosis
+    function calculatePriorProbabilities(diagnosisProbabilities) {
+      const priorProbabilities = {};
+
+      for (const diagnosis in diagnosisProbabilities) {
+        priorProbabilities[diagnosis] = diagnosisProbabilities[diagnosis];
+      }
+
+      return priorProbabilities;
+    }
+
+    // Fungsi untuk menghitung probabilitas kondisional dari data pelatihan
+    function calculateConditionalProbabilities(trainingData) {
+      const conditionalProbabilities = {};
+
+      for (const data of trainingData) {
+        const {
+          jawaban,
+          diagnosis
+        } = data;
+        const totalDataWithDiagnosis = trainingData.filter(d => d.diagnosis === diagnosis).length;
+
+        if (!conditionalProbabilities[diagnosis]) conditionalProbabilities[diagnosis] = [];
+        if (!conditionalProbabilities[diagnosis][0]) conditionalProbabilities[diagnosis][0] = {};
+        if (!conditionalProbabilities[diagnosis][1]) conditionalProbabilities[diagnosis][1] = {};
+
+        for (let i = 0; i < jawaban.length; i++) {
+          const gejala = 'gejala_' + (i + 1);
+          if (!conditionalProbabilities[diagnosis][0][gejala]) conditionalProbabilities[diagnosis][0][gejala] = 0;
+          if (!conditionalProbabilities[diagnosis][1][gejala]) conditionalProbabilities[diagnosis][1][gejala] = 0;
+
+          if (jawaban[i] === 'ya') {
+            conditionalProbabilities[diagnosis][1][gejala]++;
+          } else {
+            conditionalProbabilities[diagnosis][0][gejala]++;
+          }
+        }
+
+
+
+        for (const gejala in conditionalProbabilities[diagnosis][0]) {
+          conditionalProbabilities[diagnosis][0][gejala] /= (totalDataWithDiagnosis - 1);
+          conditionalProbabilities[diagnosis][1][gejala] /= (totalDataWithDiagnosis - 1);
+        }
+      }
+
+      return conditionalProbabilities;
+    }
+
+    // Fungsi untuk menghitung probabilitas dari data pelatihan
+    function calculateProbabilities(trainingData) {
+      const diagnosisProbabilities = calculateDiagnosisProbabilities(trainingData);
+      const priorProbabilities = calculatePriorProbabilities(diagnosisProbabilities);
+      const conditionalProbabilities = calculateConditionalProbabilities(trainingData);
+
+      return {
+        diagnosisProbabilities,
+        priorProbabilities,
+        conditionalProbabilities
+      };
+    }
+
+    // Fungsi untuk melakukan diagnosis berdasarkan jawaban menggunakan algoritma Naive Bayes
+    function naiveBayesDiagnosis(jawaban, probabilities) {
+      const {
+        diagnosisProbabilities,
+        priorProbabilities,
+        conditionalProbabilities
+      } = probabilities;
+      let maxProbability = -1;
+      let diagnosisResult = '';
+
+      for (const diagnosis in conditionalProbabilities) {
+        let probability = priorProbabilities[diagnosis];
+        for (let i = 0; i < jawaban.length; i++) {
+          const gejala = 'gejala_' + (i + 1);
+          probability *= conditionalProbabilities[diagnosis][jawaban[i] === 'ya' ? 1 : 0][gejala];
+        }
+        if (probability > maxProbability) {
+          maxProbability = probability;
+          diagnosisResult = diagnosis;
+        }
+      }
+
+      return diagnosisResult;
+    }
+
+    // Fungsi untuk mendapatkan jawaban dari input HTML
+    function getJawabanFromInput() {
+      const jawabanPengguna = [];
+      const gejalaInputs = document.querySelectorAll('input[type="radio"]:checked');
+
+      gejalaInputs.forEach(input => {
+        jawabanPengguna.push(input.value);
+      });
+
+      return jawabanPengguna;
+    }
+
+    // Fungsi untuk melakukan diagnosis setelah tombol "Diagnosis" diklik
+    function diagnose() {
+      const jawabanPengguna = getJawabanFromInput();
+      const probabilities = calculateProbabilities(trainingData);
+      const hasilDiagnosis = naiveBayesDiagnosis(jawabanPengguna, probabilities);
+
+      console.log(jawabanPengguna);
+      // Pastikan ada hasil diagnosis sebelum menampilkan pesan alert
+      if (hasilDiagnosis) {
+        console.log('Hasil Diagnosis: ' + hasilDiagnosis);
+      } else {
+        console.log('Tidak ada hasil diagnosis yang valid untuk jawaban yang diberikan.');
+      }
+    }
+
+
+
+
+    // script perpindahan halaman soal
+
+    console.log('connect')
+  </script>
+
+
+
 </body>
 
 </html>
