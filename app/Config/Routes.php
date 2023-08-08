@@ -47,6 +47,8 @@ $routes->group('admin', function ($routes) {
 $routes->get('pages/goback', 'PsikotesController::goback');
 $routes->get('pages/psikotes/(:num)', 'PsikotesController::index/$1');
 $routes->get('pages/psikotes', 'PsikotesController::index');
+$routes->get('pages/cekDiagnosis', 'PsikotesController::cekDiagnosis');
+$routes->get('pages/getJawaban', 'PsikotesController::getJawabanUser');
 // $routes->post('pages/submit_answers', 'PsikotesController::submit_answers');
 $routes->post('psikotes/submit_answers/(:num)', 'PsikotesController::submit_answers/$1');
 $routes->post('pages/diagnosis', 'PsikotesController::diagnosis');
@@ -81,3 +83,8 @@ if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 
 // benerin dulu view admin ,check migration, sekalian bikinin seeder, biar bisa di run divca. 
 // oiya jangan lupa bikin lemparan di home untuk perbedaan rolenya .
+
+
+
+// noted : 
+// sepertinya index php main templarte yang di hosting pakei yang lama aja , tapi di comppare duul

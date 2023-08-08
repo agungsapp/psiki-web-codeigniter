@@ -4,16 +4,18 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\BankSoalModel;
+use App\Models\JawabanModel;
 
 class PsikotesController extends BaseController
 {
 
-    protected $bankSoal, $session;
+    protected $bankSoal, $session, $jawabanModel;
 
     public function __construct()
     {
         $this->bankSoal = new BankSoalModel();
         $this->session = \Config\Services::session();
+        $this->jawabanModel = new JawabanModel();
     }
 
 
@@ -31,7 +33,8 @@ class PsikotesController extends BaseController
         $data = [
             'menu' => 'psikotes',
             'footer' => 'relative',
-            'soal' => $this->bankSoal->findAll($perPage, $offset),
+            'soal' => $this->bankSoal->findAll(),
+            // 'soal' => $this->bankSoal->findAll($perPage, $offset),
             'page' => $page,
             'session' => session()
 
@@ -41,13 +44,22 @@ class PsikotesController extends BaseController
         // dd($_SESSION);
 
 
-        echo "<script>console.log(" . $data['page'] . ")</script>";
+        // echo "<script>console.log(" . $data['page'] . ")</script>";
 
         // dd($data['allQuestions']);
 
         // dd($data['session']);
+        $checkJawaban = $this->jawabanModel->cekStatusPsikotes(user_id());
 
-        return view('pages/psikotes', $data);
+        if ($checkJawaban > 0) {
+            $data = [
+                'menu' => 'psikotes',
+                'footer' => 'fixed',
+            ];
+            return view('pages/success_psikotes', $data);
+        } else {
+            return view('pages/psikotes', $data);
+        }
     }
 
 
@@ -119,5 +131,53 @@ class PsikotesController extends BaseController
 
         // Redirect ke halaman tertentu atau lakukan apa pun yang sesuai dengan kebutuhan Anda
         return redirect()->to(site_url('halaman_tujuan'));
+    }
+
+
+    public function diagnosis()
+    {
+        $postData = $this->request->getPost();
+        // dd($postData['soal-7']);
+        // Misalkan Anda memiliki nilai user_id dalam variabel $user_id
+        $user_id = user_id(); // Ganti dengan cara Anda mendapatkan user_id
+        $postData['user_id'] = $user_id;
+
+        $i = 1;
+        while ($postData && $i <= 15) {
+            $data = [
+                'user_id' => user_id(),
+                'jawaban' => $postData['soal-' . $i]
+            ];
+            $this->jawabanModel->insert($data);
+            $i++;
+        }
+
+        $data = [
+            'menu' => 'psikotes',
+            'footer' => 'fixed',
+            'pesan' => 'Data psikotes kamu sudah berhasil di simpan 😊'
+        ];
+
+
+
+        return view('pages/success_psikotes', $data);
+    }
+
+    public function cekDiagnosis()
+    {
+        $data = [
+            'menu' => 'psikotes',
+            'footer' => 'fixed',
+        ];
+        return view('pages/hasil_diagnosis', $data);
+    }
+
+    public function getJawabanUser()
+    {
+        // Mendapatkan data jawaban dari database menggunakan model (contoh menggunakan model JawabanModel)
+        $jawabanData = $this->jawabanModel->getDataJawabanByID(user_id()); // Anda dapat mengganti metode findAll() dengan metode lain sesuai kebutuhan
+        // dd($jawabanData);
+        // Kembalikan data jawaban dalam format JSON sebagai respons
+        return $this->response->setJSON($jawabanData);
     }
 }

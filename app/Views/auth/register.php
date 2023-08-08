@@ -76,12 +76,12 @@
         </button>
 
         <div>
-          <?= dd(session('errors')); ?>
+
         </div>
 
         <p class="mt-5 text-lg font-semibold text-basic font-dm">
           Sudah punya akun ?
-          <a href="login.html" class="text-basic hover:font-bold hover:underline">
+          <a href="<?= base_url('login'); ?>" class="text-basic hover:font-bold hover:underline">
             Login
           </a>
         </p>

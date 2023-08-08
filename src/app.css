@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .navbar-active {
+    @apply text-white font-bold font-dm bg-pupus rounded md:bg-transparent md:text-pupus md:p-0 dark:text-white md:dark:text-blue-500;
+  }
+
+  .navbar-base {
+    @apply text-gray-900 rounded font-dm transition-all hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-pupus md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent;
+  }
+
+  .active-nav {
+    @apply block py-2 mt-2 md:py-1 md:px-3 pl-1 text-white rounded md:rounded-3xl font-dm bg-basic;
+  }
+
+  .base-nav {
+    @apply block py-2 mt-2 md:py-1 md:px-3 pl-1  text-basic rounded md:rounded-3xl font-dm hover:bg-basic hover:text-white;
+  }
+}
