@@ -41,6 +41,9 @@ $routes->group('admin', function ($routes) {
     $routes->get('admin', 'Admin\UsersController::admin');
     $routes->get('user', 'Admin\UsersController::index');
     $routes->get('banksoal', 'Admin\SoalController::index');
+    $routes->get('saran', 'Admin\SaranController::index');
+
+    $routes->post('simpanSaran', 'Admin\SaranController::store');
 });
 
 // $routes->post('/simpanjawaban', 'PsikotesController::simpanJawabanPasien');

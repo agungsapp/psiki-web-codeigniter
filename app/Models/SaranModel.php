@@ -10,7 +10,7 @@ class SaranModel extends Model
     protected $table            = 'saran';
     protected $primaryKey       = 'saran_id';
     protected $useAutoIncrement = true;
-    protected $allowedFields    = ['user_id', 'jawaban'];
+    protected $allowedFields    = ['gejala_id', 'saran'];
 
     // Dates
     protected $useTimestamps = true;
@@ -28,5 +28,9 @@ class SaranModel extends Model
     public function cariSaran($gejala_id)
     {
         return $this->db->query("SELECT saran FROM saran WHERE gejala_id = $gejala_id")->getResult();
+    }
+    public function getAll()
+    {
+        return $this->db->query("SELECT * FROM saran")->getResult();
     }
 }
