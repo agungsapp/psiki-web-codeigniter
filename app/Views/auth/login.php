@@ -59,10 +59,10 @@
         <?php endif; ?>
         <hr class="border-1 border-white mt-3" />
         <?php if ($config->allowRegistration) : ?>
-          <p class="mt-3 mb-5 text-md text-white font-dm">
+          <p class="mt-5 mb-5 text-md text-white font-dm">
             Belum punya akun ?
-            <a href="<?= url_to('register') ?>" class="text-white hover:font-bold hover:underline">
-              buat akun
+            <a href="<?= url_to('register') ?>" class="ms-2 text-basic py-1 px-3 font-bold hover:text-basic hover:px-3 hover:py-1 bg-white capitalize rounded-lg">
+              Buat Akun
             </a>
           </p>
         <?php endif; ?>

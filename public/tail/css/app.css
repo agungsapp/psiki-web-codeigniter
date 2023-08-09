@@ -960,6 +960,12 @@ input[type="range"]::-ms-fill-lower {
 .mt-8 {
   margin-top: 2rem;
 }
+.ms-3 {
+  margin-inline-start: 0.75rem;
+}
+.ms-2 {
+  margin-inline-start: 0.5rem;
+}
 .block {
   display: block;
 }
@@ -1223,6 +1229,10 @@ input[type="range"]::-ms-fill-lower {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(63 131 248 / var(--tw-bg-opacity));
 }
 .p-10 {
   padding: 2.5rem;
@@ -1501,8 +1511,33 @@ input[type="range"]::-ms-fill-lower {
   background-color: rgb(158 211 183 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-white:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.hover\:px-3:hover {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.hover\:py-1:hover {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .hover\:font-bold:hover {
   font-weight: 700;
+}
+
+.hover\:text-basic:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 133 111 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {

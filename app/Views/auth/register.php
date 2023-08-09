@@ -79,9 +79,9 @@
 
         </div>
 
-        <p class="mt-5 text-lg font-semibold text-basic font-dm">
+        <p class="mt-5 text-lg text-basic font-dm">
           Sudah punya akun ?
-          <a href="<?= base_url('login'); ?>" class="text-basic hover:font-bold hover:underline">
+          <a href="<?= base_url('login'); ?>" class="text-white py-1 px-3 rounded-lg bg-basic hover:font-bold hover:underline">
             Login
           </a>
         </p>
