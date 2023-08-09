@@ -46,6 +46,19 @@ $routes->group('admin', function ($routes) {
     $routes->post('simpanSaran', 'Admin\SaranController::store');
 });
 
+// jenis gangguan
+$routes->get('gangguan/kecemasan', 'Jenis::gangguanKecemasan');
+$routes->get('gangguan/mood', 'Jenis::gangguanMood');
+$routes->get('gangguan/skizofrenia', 'Jenis::skizofrenia');
+$routes->get('gangguan/makan', 'Jenis::gangguanMakan');
+$routes->get('gangguan/ocd', 'Jenis::ocd');
+$routes->get('gangguan/kepribadian', 'Jenis::gangguanKepribadian');
+$routes->get('gangguan/adhd', 'Jenis::adhd');
+$routes->get('gangguan/depresi', 'Jenis::depresi');
+$routes->get('gangguan/ts', 'Jenis::ts');
+
+
+
 // $routes->post('/simpanjawaban', 'PsikotesController::simpanJawabanPasien');
 $routes->get('pages/goback', 'PsikotesController::goback');
 $routes->get('pages/psikotes/(:num)', 'PsikotesController::index/$1');

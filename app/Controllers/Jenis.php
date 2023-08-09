@@ -19,36 +19,76 @@ class Jenis extends BaseController
         ];
         return view('pages/jenis/gangguan_kecemasan',  $data);
     }
+
     public function gangguanMood()
     {
-        return view('pages/jenis/gangguan_mood');
+        $data = [
+            'menu' => 'jenis',
+            'footer' => 'relative'
+        ];
+        return view('pages/jenis/gangguan_mood', $data);
     }
+
     public function skizofrenia()
     {
-        return view('pages/jenis/skizofrenia');
+        $data = [
+            'menu' => 'jenis',
+            'footer' => 'relative'
+        ];
+        return view('pages/jenis/skizofrenia', $data);
     }
+
     public function gangguanMakan()
     {
-        return view('pages/jenis/gangguan_makan');
+        $data = [
+            'menu' => 'jenis',
+            'footer' => 'relative'
+        ];
+        return view('pages/jenis/gangguan_makan', $data);
     }
+
     public function ocd()
     {
-        return view('pages/jenis/ocd');
+        $data = [
+            'menu' => 'jenis',
+            'footer' => 'relative'
+        ];
+        return view('pages/jenis/ocd', $data);
     }
+
     public function gangguanKepribadian()
     {
-        return view('pages/jenis/gangguan_kepribadian');
+        $data = [
+            'menu' => 'jenis',
+            'footer' => 'relative'
+        ];
+        return view('pages/jenis/gangguan_kepribadian', $data);
     }
+
     public function adhd()
     {
-        return view('pages/jenis/adhd');
+        $data = [
+            'menu' => 'jenis',
+            'footer' => 'relative'
+        ];
+        return view('pages/jenis/adhd', $data);
     }
+
     public function depresi()
     {
-        return view('pages/jenis/depresi');
+        $data = [
+            'menu' => 'jenis',
+            'footer' => 'relative'
+        ];
+        return view('pages/jenis/depresi', $data);
     }
+
     public function ts()
     {
-        return view('pages/jenis/ts');
+        $data = [
+            'menu' => 'jenis',
+            'footer' => 'relative'
+        ];
+        return view('pages/jenis/ts', $data);
     }
 }
