@@ -12,7 +12,7 @@
 
   <!-- font awesome  -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="<?= base_url('user/assets'); ?>/css/output.css" />
+  <link rel="stylesheet" href="<?= base_url('tail/css/app.css'); ?>" />
 </head>
 
 <body class="relative">
@@ -20,14 +20,15 @@
 
   <nav class="bg-primary border-gray-200 dark:bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <a href="https://flowbite.com/" class="flex items-center">
+      <a href="<?= base_url(); ?>" class="flex items-center">
         <p class="self-center text-2xl font-semibold whitespace-nowrap font-dm">
           Psiki<span class="text-basic">Web</span>
         </p>
       </a>
       <!-- profile dropdown -->
-      <?php if (logged_in()) : ?>
-        <div class="flex items-center md:order-2">
+      <div class="flex items-center md:order-2">
+        <?php if (logged_in()) : ?>
+          <!-- user start -->
           <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
             <span class="sr-only">Open user menu</span>
             <img class="w-8 h-8 rounded-full" src="<?= base_url('user/assets'); ?>/img/profile1.png" alt="user photo" />
@@ -48,16 +49,20 @@
               </li>
             </ul>
           </div>
-          <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-            </svg>
-          </button>
-        </div>
-      <?php else : ?>
-        <div class="flex items-center md:order-2"></div>
-      <?php endif ?>
+          <!-- user end -->
+        <?php else : ?>
+
+          <a href="<?= base_url('login'); ?>" class="transition-all duration-500 active-nav font-bold">Login</a>
+
+        <?php endif ?>
+        <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+
       <!-- profile dropdown end -->
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="mobile-menu-2">
         <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-primary rounded-lg bg-primary md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-primary dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -85,6 +90,8 @@
   </main>
 
 
+  <div class="fixed none"></div>
+
   <!-- footer -->
   <footer class="bg-basic <?= $footer; ?> bottom-0 left-0 right-0 font-dm">
     <div class="p-6 flex justify-between">
@@ -109,7 +116,18 @@
     </div>
   </footer>
 
-  <script src="<?= base_url('user/assets'); ?>/js/flowbite.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+
+  <script src="<?= base_url('tail/js/flowbite.min.js'); ?>"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+
+
+  <?= $this->renderSection('script'); ?>
+
+
+
 </body>
 
 </html>
