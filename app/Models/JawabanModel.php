@@ -33,4 +33,15 @@ class JawabanModel extends Model
     {
         return $this->db->query("SELECT * FROM jawaban WHERE user_id = $id")->getResult();
     }
+
+    public function getUsersAnswer()
+    {
+        return $this->db->query("SELECT COUNT(DISTINCT user_id) AS jumlah
+FROM jawaban;")->getRow();
+    }
+
+    public function reset($id)
+    {
+        return $this->db->query("DELETE FROM jawaban WHERE user_id = $id");
+    }
 }

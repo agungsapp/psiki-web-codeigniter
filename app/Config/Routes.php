@@ -44,6 +44,10 @@ $routes->group('admin', function ($routes) {
     $routes->get('saran', 'Admin\SaranController::index');
 
     $routes->post('simpanSaran', 'Admin\SaranController::store');
+    $routes->post('updateAdmin', 'Admin\UsersController::editDataAdmin');
+    $routes->post('updateUsers', 'Admin\UsersController::editDataUsers');
+    $routes->get('deleteUsers/(:num)', 'Admin\UsersController::deleteUsers/$1');
+    $routes->get('reset/(:num)', 'Admin\UsersController::reset/$1');
 });
 
 // jenis gangguan
