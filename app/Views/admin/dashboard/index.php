@@ -10,7 +10,7 @@
        <div class="box bg-cyan text-center">
          <h1 class="font-light text-white"><i class="mdi mdi-account"></i></h1>
          <h6 class="text-white">Total Users</h6>
-         <h6 class="text-white">10</h6>
+         <h6 class="text-white"><?= $jumlah_users; ?></h6>
        </div>
      </div>
    </div>
@@ -19,8 +19,8 @@
      <div class="card card-hover">
        <div class="box bg-success text-center">
          <h1 class="font-light text-white"><i class="mdi mdi-book-multiple"></i></h1>
-         <h6 class="text-white">Jenis Gangguan</h6>
-         <h6 class="text-white">11</h6>
+         <h6 class="text-white">Jumlah user menjawab</h6>
+         <h6 class="text-white"><?= $users_menjawab->jumlah; ?></h6>
        </div>
      </div>
    </div>

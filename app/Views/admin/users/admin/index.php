@@ -48,8 +48,74 @@
                     <td><?= $item->umur; ?></td>
                     <td><?= $item->phone; ?></td>
                     <td>
-                      <a href="#" class="btn btn-warning">Edit</a>
-                      <a href="#" class="btn btn-danger text-white">Delete</a>
+                      <!-- Button trigger modal edit -->
+                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $item->id ?>">
+                        Edit
+                      </button>
+                      <!-- <a href="#" class="btn btn-danger text-white ">Delete</a> -->
+
+
+                      <!-- Modal edit -->
+                      <div class="modal fade" id="modalEdit<?= $item->id ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="staticBackdropLabel">Form edit</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="updateAdmin" method="post">
+                              <?= csrf_field(); ?>
+                              <div class="modal-body">
+                                <!-- hidden id -->
+                                <input type="hidden" name="ids" value="<?= $item->id ?>">
+
+                                <!-- first name -->
+                                <div class="mb-3">
+                                  <label for="namadepan" class="form-label">Nama depan</label>
+                                  <input type="text" class="form-control" id="namadepan" name="namadepan" placeholder="masukan nama depan ..." value="<?= $item->first_name; ?>">
+                                </div>
+
+                                <!-- last name -->
+                                <div class="mb-3">
+                                  <label for="namabelakang" class="form-label">Nama belakang</label>
+                                  <input type="text" class="form-control" id="namabelakang" name="namabelakang" placeholder="masukan nama belakang ..." value="<?= $item->last_name; ?>">
+                                </div>
+
+                                <!-- username -->
+                                <div class="mb-3">
+                                  <label for="username" class="form-label">Username</label>
+                                  <input type="text" class="form-control" id="username" name="username" placeholder="masukan username ..." value="<?= $item->username; ?>">
+                                </div>
+
+                                <!-- email -->
+                                <div class="mb-3">
+                                  <label for="email" class="form-label">E-mail</label>
+                                  <input type="email" class="form-control" id="email" name="email" placeholder="masukan email ..." value="<?= $item->email; ?>">
+                                </div>
+
+                                <!-- umur -->
+                                <div class="mb-3">
+                                  <label for="umur" class="form-label">Umur</label>
+                                  <input type="number" class="form-control" id="umur" name="umur" placeholder="masukan umur ..." value="<?= $item->umur; ?>">
+                                </div>
+
+                                <!-- nomor -->
+                                <div class="mb-3">
+                                  <label for="phone" class="form-label">No. Telp</label>
+                                  <input type="number" class="form-control" id="phone" name="phone" placeholder="masukan nomor telepon ..." value="<?= $item->phone; ?>">
+                                </div>
+
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
                     </td>
                   </tr>
                 <?php endforeach ?>

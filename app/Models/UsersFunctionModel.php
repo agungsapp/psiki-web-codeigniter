@@ -13,7 +13,7 @@ class UsersFunctionModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['first_name', 'last_name', 'username', 'email', 'umur', 'phone'];
 
     // Dates
     protected $useTimestamps = false;
@@ -39,6 +39,15 @@ class UsersFunctionModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
+
+    protected $db;
+
+    public function __construct()
+    {
+        $this->db = \Config\Database::connect();;
+    }
+
+
     public function getUsersByGroupId($groupId)
     {
         $query = $this->select('users.*')
@@ -48,5 +57,12 @@ class UsersFunctionModel extends Model
             ->getResultObject('User');
 
         return $query;
+    }
+
+    public function countUser()
+    {
+        $query = $this->db->query('SELECT * FROM auth_groups_users WHERE group_id = 2');
+
+        return $query->getNumRows();
     }
 }
